@@ -18,7 +18,7 @@
 				"-g",
 				"-I${workspaceRoot}/dependencies/GLFW/include",
 				"-I${workspaceFolder}/dependencies/GLAD/include",
-				"-I${workspaceFolder}/dependencies/GLM",
+				"-I${workspaceFolder}/dependencies/GLM/GLM",
 				"-I${workspaceFolder}/dependencies",
 				"${workspaceFolder}/dependencies/shader/shader.cpp",
 				"${workspaceFolder}/dependencies/window/window.cpp",

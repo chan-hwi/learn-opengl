@@ -6,7 +6,7 @@
 				"${workspaceFolder}/dependencies/",
 				"${workspaceFolder}/dependencies/GLFW/include",
 				"${workspaceFolder}/dependencies/GLAD/include",
-				"${workspaceFolder}/dependencies/GLM"
+				"${workspaceFolder}/dependencies/GLM/GLM"
 			],
 			"defines": ["_DEBUG", "UNICODE", "_UNICODE"],
 			"compilerPath": "C:/mingw64/bin/g++.exe",
