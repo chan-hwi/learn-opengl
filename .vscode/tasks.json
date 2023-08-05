@@ -1,0 +1,64 @@
+{
+	"version": "2.0.0",
+	"echoCommand": true,
+	"tasks": [
+		{
+			"label": "generate build directory",
+			"type": "shell",
+			"command": "if not exist ${workspaceRoot}\\builds\\${relativeFileDirname} mkdir ${workspaceRoot}\\builds\\${relativeFileDirname}"
+		},
+		//C++ 컴파일
+		{
+			"label": "C/C++: g++.exe build active file",
+			"command": "g++",
+			"args": [
+				"${file}",
+				"-std=c++17",
+				"${workspaceRoot}/dependencies/GLAD/src/glad.c",
+				"-g",
+				"-I${workspaceRoot}/dependencies/GLFW/include",
+				"-I${workspaceFolder}/dependencies/GLAD/include",
+				"-I${workspaceFolder}/dependencies/GLM",
+				"-I${workspaceFolder}/dependencies",
+				"${workspaceFolder}/dependencies/shader/shader.cpp",
+				"${workspaceFolder}/dependencies/window/window.cpp",
+				"${workspaceFolder}/dependencies/stb_image/stb_image.cpp",
+				"-lopengl32",
+				"-L${workspaceRoot}/dependencies/GLFW/lib-mingw-w64",
+				"-L${workspaceRoot}/builds/glfw3dll",
+				"-static",
+				"-lglfw3dll",
+				"-o",
+				"${workspaceFolder}/builds/${relativeFileDirname}/${fileBasenameNoExtension}"
+			],
+			"group": "build",
+			//컴파일시 에러를 편집기에 반영
+			//참고:   https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher
+			"problemMatcher": {
+				"fileLocation": ["relative", "${workspaceRoot}"],
+				"pattern": {
+					// The regular expression.
+					//Example to match: helloWorld.c:5:3: warning: implicit declaration of function 'prinft'
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			},
+			"dependsOn": ["generate build directory"]
+		},
+
+		// // 바이너리 실행(Windows)
+		{
+			"label": "execute",
+			"command": "cmd",
+			"group": "test",
+			"args": [
+				"/C",
+				"${workspaceFolder}/builds/${relativeFileDirname}/${fileBasenameNoExtension}"
+			]
+		}
+	]
+}
