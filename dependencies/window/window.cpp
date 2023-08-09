@@ -2,6 +2,10 @@
 
 Window::Window(int width, int height, const char *title)
 {
+    this->width = width;
+    this->height = height;
+    this->title = title;
+
     // glfw 초기화
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
